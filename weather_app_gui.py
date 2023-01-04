@@ -17,7 +17,7 @@ def format_response(weather_json):
         temperature = (weather_json['main']['temp'])
     
         # to pass the string values wanted
-        final_str =  'Cidade: %s \nCondições: %s \nTemperatura (ºC): %s' % (name, description, temperature)
+        final_str =  'City: %s \nConditions: %s \nTemperature (ºC): %s' % (name, description, temperature)
 
     except:
         # error in case typing error or other occurred
