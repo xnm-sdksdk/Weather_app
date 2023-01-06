@@ -3,6 +3,7 @@ from tkinter import *
 import requests
 from PIL import ImageTk, Image
 from tkinter import font
+from tkinter import messagebox
 
 # VARIABLES
 HEIGHT = 500
@@ -17,11 +18,12 @@ def format_response(weather_json):
         temperature = (weather_json['main']['temp'])
     
         # to pass the string values wanted
+        messagebox.showinfo("Success", "Retrieving data from server.")
         final_str =  'City: %s \nConditions: %s \nTemperature (ºC): %s' % (name, description, temperature)
 
     except:
         # error in case typing error or other occurred
-        final_str = 'Oops, some error occurred \nretrieving information!'
+        messagebox.showerror("Error", "Oops, some error occurred retrieving information!")
 
     return final_str
 
