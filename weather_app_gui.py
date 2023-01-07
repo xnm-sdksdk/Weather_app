@@ -5,10 +5,6 @@ from PIL import ImageTk, Image
 from tkinter import font
 from tkinter import messagebox
 
-# VARIABLES
-HEIGHT = 500
-WIDTH = 600
-
 
 # FUNCTION FOR FORMAT RESPONSE
 def format_response(weather_json):
@@ -18,12 +14,12 @@ def format_response(weather_json):
         temperature = (weather_json['main']['temp'])
     
         # to pass the string values wanted
-        messagebox.showinfo("Success", "Retrieving data from server.")
+        messagebox.showinfo("Weather GUI", "Retrieving data from server.")
         final_str =  'City: %s \nConditions: %s \nTemperature (ºC): %s' % (name, description, temperature)
 
     except:
         # error in case typing error or other occurred
-        messagebox.showerror("Error", "Oops, some error occurred retrieving information!")
+        messagebox.showerror("Weather GUI", "Oops, some error occurred retrieving information!")
 
     return final_str
 
@@ -46,11 +42,23 @@ def get_weather(city):
 
 # WINDOW
 root = Tk()
+
+root_width = 600
+root_height = 500
+
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+
+x = (screen_width/2) - (root_width/2)
+y = (screen_height/2) - (root_height/2)
+
+root.geometry("{:.0f}x{:.0f}+{:.0f}+{:.0f}".format(root_width, root_height, int(x), int(y)))
 root.title('Weather GUI')
 root.resizable(0,0)
 
+
 # CANVAS
-canvas = Canvas(root, height=HEIGHT, width=WIDTH)
+canvas = Canvas(root)
 canvas.pack()
 
 # BACKGROUND IMAGE
@@ -59,7 +67,7 @@ background_label = Label(root, image=background_img)
 background_label.place(relwidth=1, relheight=1)
 
 # FRAME
-frame = Frame(root, bg="#80c1ff", bd=5)
+frame = Frame(root, bg="#000e7a", bd=5)
 frame.place(relwidth=0.75, relheight=0.1, relx=0.5, rely=0.2, anchor='n')
 
 # BUTTON
@@ -72,7 +80,7 @@ entry = Entry(frame, font=40)
 entry.place(relwidth=0.65, relheight=1)
 
 # LOWER FRAME
-lower_frame = Frame(root, bg='#80c1ff', bd=10)
+lower_frame = Frame(root, bg="#000e7a", bd=10)
 lower_frame.place(relx=0.5, rely=0.75, relwidth=0.75, relheight=0.2, anchor='n')
 
 # LABEL
